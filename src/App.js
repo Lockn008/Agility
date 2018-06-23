@@ -1,19 +1,52 @@
 import React, { Component } from 'react';
-import database from './database';
-import logo from './logo.svg';
+import database, { auth, provider } from './database';
+import { Navbar } from "./component/Navbar";
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      //currentItem: '',
+      //username: '',
+      //items: [],
+      user: null
+    }
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
+  }
+
+  login() {
+    auth.signInWithPopup(provider)
+    .then((result) => {
+      const user = result.user;
+      this.setState({
+        user
+      });
+    });
+  }
+
+  logout() {
+    auth.signOut()
+    .then(() => {
+      this.setState({
+        user: null
+      });
+    });
+  }
+
+  componentDidMount() {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ user });
+      }
+    });
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Navbar user={this.state.user} />
       </div>
     );
   }
