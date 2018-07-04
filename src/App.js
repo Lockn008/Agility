@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import database, { auth, provider } from './database';
 import { Navbar } from "./component/Navbar";
+import { Splash } from "./component/Splash";
+import { Projects } from "./component/Projects";
 import './App.css';
 
 class App extends Component {
@@ -55,6 +57,10 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar user={this.state.user} login={this.login.bind(this)} logout={this.logout.bind(this)} />
+        {this.state.user ? 
+          <Projects user={this.state.user} /> :
+          <Splash />
+        }
       </div>
     );
   }

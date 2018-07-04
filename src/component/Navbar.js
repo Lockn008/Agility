@@ -10,13 +10,13 @@ export class Navbar extends Component {
 	}
 
 	render() {
-		//need to use an if statement to check if user is null before digging through object, otherwise it will 
-		//kill the app with an error before it loads the user object
-		if (this.props.user != null) {
-			console.log(this.props.user.email);  //remove this once we have figured out pushing state to a higher level.
-			console.log(this.props.user.photoURL);
-			console.log(this.props.user.displayName);
-		}
+		// //need to use an if statement to check if user is null before digging through object, otherwise it will 
+		// //kill the app with an error before it loads the user object
+		// if (this.props.user != null) {
+		// 	console.log(this.props.user.email);  //remove this once we have figured out pushing state to a higher level.
+		// 	console.log(this.props.user.photoURL);
+		// 	console.log(this.props.user.displayName);
+		// }
 
 		return (
 			<nav>
