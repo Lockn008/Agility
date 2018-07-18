@@ -23,7 +23,7 @@ export class Navbar extends Component {
 				<div className="nav-wrapper blue darken-3">
 					<span className="brand-logo center">Agility</span>
 					<ul id="nav-mobile" className="left hide-on-med-and-down" style={{paddingLeft:20}}>
-						<li>Welcome, Guest!</li>
+						<li>Welcome, {this.props.user ? this.props.user.displayName : "Guest"}</li>
 					</ul>
 					<div id="nav-mobile" className="right hide-on-med-and-down" style={{paddingRight:20}}>
 					    {this.props.user ?

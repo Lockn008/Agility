@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import database, { auth, provider } from './database';
+import database, { auth, provider, fireRoot } from './database';
 import { Navbar } from "./component/Navbar";
 import { Splash } from "./component/Splash";
 import { Projects } from "./component/Projects";
@@ -25,6 +25,7 @@ class App extends Component {
       this.setState({
         user
       });
+
     });
   }
 
@@ -42,17 +43,26 @@ class App extends Component {
       if (user) {
         this.setState({ user });
       }
+      //updates users portion of db on login (to check for updates of username, email, or avatar)
+      var usersRef = fireRoot.child("users");
+      usersRef.child(user.uid).set({
+        "email": user.email,
+        "username": user.displayName,
+        "photoURL": user.photoURL
+      });
     });
+
   }
 
   render() {
     //need to use an if statement to check if user is null before digging through object, otherwise it will 
     //kill the app with an error before it loads the user object
-    if (this.state.user != null) {  //need to user this.state here, can use this.props in components
-      console.log(this.state.user.email);  //remove this once we have figured out pushing state to a higher level.
-      console.log(this.state.user.photoURL);
-      console.log(this.state.user.displayName);
-    }
+    // if (this.state.user != null) {  //need to user this.state here, can use this.props in components
+    //   console.log(this.state.user.email);  //remove this once we have figured out pushing state to a higher level.
+    //   console.log(this.state.user.photoURL);
+    //   console.log(this.state.user.displayName);
+    //   console.log(this.state.user);
+    // }
 
     return (
       <div className="App">

@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
 export class Projects extends Component {
+	getProjects() {
+		
+	}
+	
 	render() {
 		return (
 			<div className="container">
