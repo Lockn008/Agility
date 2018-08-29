@@ -19,19 +19,31 @@ export class Navbar extends Component {
 		// }
 
 		return (
-			<nav>
-				<div className="nav-wrapper blue darken-3">
-					<span className="brand-logo center">Agility</span>
-					<ul id="nav-mobile" className="left hide-on-med-and-down" style={{paddingLeft:20}}>
-						<li>Welcome, {this.props.user ? this.props.user.displayName : "Guest"}</li>
-					</ul>
-					<div id="nav-mobile" className="right hide-on-med-and-down" style={{paddingRight:20}}>
-					    {this.props.user ?
-							<button onClick={this.onLogout.bind(this)}>Log Out</button>
+			<nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
+				<span className="navbar-brand justify-content-start">Agility</span>
+				<div className="navbar-collapse justify-content-end" id="navbarSupportedContent">
+					<ul className="navbar-nav">
+						{this.props.user
+							?
+							<li className="nav-item dropdown">
+								<a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									{this.props.user.displayName}
+								</a>
+								<div className="dropdown-menu" aria-labelledby="navbarDropdown">
+									<button className="dropdown-item" onClick={this.onLogout.bind(this)}>Logout</button>
+								</div>
+							</li>
 							:
-							<button onClick={this.onLogin.bind(this)}>Log In</button>
+							<li className="nav-item dropdown">
+								<a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Welcome
+								</a>
+								<div className="dropdown-menu" aria-labelledby="navbarDropdown">
+									<button className="dropdown-item" onClick={this.onLogin.bind(this)}>Login</button>
+								</div>
+							</li>
 						}
-					</div>
+					</ul>
 				</div>
 			</nav>
 		);

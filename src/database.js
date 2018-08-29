@@ -13,5 +13,7 @@ var database = firebase.initializeApp(config);
 export const provider = new firebase.auth.GoogleAuthProvider();
 export const auth = firebase.auth();
 export var fireRoot = firebase.database().ref();
+export var usersRef = fireRoot.child("users");
+export var projectsRef = fireRoot.child("projects");
 
 export default database;

@@ -1,18 +1,28 @@
 import React, { Component } from 'react';
-import database, { auth, provider, fireRoot } from './database';
+import database, { auth, provider, usersRef, projectsRef } from './database';
+import { Router, Route } from 'react-router';
 import { Navbar } from "./component/Navbar";
 import { Splash } from "./component/Splash";
 import { Projects } from "./component/Projects";
+import { Project } from "./component/Project";
+import { AddProjectModal } from "./component/AddProjectModal";
+import { AddTaskModal } from "./component/AddTaskModal";
+import { AddSubtaskModal } from "./component/AddSubtaskModal";
+import { AddUserModal } from "./component/AddUserModal";
+import { EditProjectModal } from "./component/EditProjectModal";
+import { EditTaskModal } from "./component/EditTaskModal";
+import { EditSubtaskModal } from "./component/EditSubtaskModal";
+import { DeleteProjectModal } from "./component/DeleteProjectModal";
+import { DeleteTaskModal } from "./component/DeleteTaskModal";
+import { DeleteSubtaskModal } from "./component/DeleteSubtaskModal";
 import './App.css';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      //currentItem: '',
-      //username: '',
-      //items: [],
-      user: null
+      user: null,
+      project: null
     }
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
@@ -38,17 +48,25 @@ class App extends Component {
     });
   }
 
+  getProjects() {
+
+  }
+
+  resetProjects() {
+
+  }
+
   componentDidMount() {
     auth.onAuthStateChanged((user) => {
       if (user) {
         this.setState({ user });
       }
       //updates users portion of db on login (to check for updates of username, email, or avatar)
-      var usersRef = fireRoot.child("users");
       usersRef.child(user.uid).set({
         "email": user.email,
         "username": user.displayName,
-        "photoURL": user.photoURL
+        "photoURL": user.photoURL,
+        "projects": null
       });
     });
 
@@ -71,6 +89,15 @@ class App extends Component {
           <Projects user={this.state.user} /> :
           <Splash />
         }
+        <AddTaskModal />
+        <AddSubtaskModal />
+        <AddUserModal />
+        <EditProjectModal />
+        <EditTaskModal />
+        <EditSubtaskModal />
+        <DeleteProjectModal />
+        <DeleteTaskModal />
+        <DeleteSubtaskModal />
       </div>
     );
   }
