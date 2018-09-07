@@ -20,12 +20,4 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-json_architecture.txt
-src/practice.html
-src/practice.js
-src/practice2.html
-src/practice3.html
-projects.txt
-project.txt
-
-
+src/database/config.js
